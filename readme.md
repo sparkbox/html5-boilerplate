@@ -5,59 +5,52 @@ HTML5 Boilerplate is a professional front-end template that helps you build fast
 This project is the product of many years of iterative development and combined community knowledge. It does not impose a specific development philosophy or framework, so you're free to architect your code in the way that you want.
 
 
-## Quick start
+## How to Build
 
-Clone the git repo - `git clone git://github.com/h5bp/html5-boilerplate.git` - or [download it](https://github.com/h5bp/html5-boilerplate/zipball/master)
+1. Open "Terminal"
+2. Next, simply type: ant build
+3. Now, look in your project folder and see that there is a newly created "publish" directory within your project. Inside, you will find your minified CSS, JS and along with duplicates of the files from your original directory. This new set of files within "publish" is your production code.
 
+## Build Options
 
-## Features
+**ant build**     # minor html optimizations (extra quotes removed). inline script/style minified (default)
 
-* HTML5 ready. Use the new elements with confidence.
-* Cross-browser compatible (Chrome, Opera, Safari, Firefox 3.6+, IE6+).
-* "Mobile first"/"Responsive design"-capable out of the box.
-* Designed with progressive enhancement in mind.
-* CSS normalizations and common bug fixes.
-* IE-specific classes for easier cross-browser control.
-* A default print stylesheet, performance optimized.
-* Mobile browser optimizations.
-* Protection against any stray `console.log` causing JavaScript errors in IE6/7.
-* The latest jQuery via CDN, with a local fallback.
-* A custom Modernizr build (including Respond.js) for feature detection and a polyfill for CSS Media Queries.
-* An optimized Google Analytics snippet.
-* Apache server caching, compression, and other configuration defaults for Grade-A performance.
-* A build script to automate the minification and concatenation of your HTML/CSS/JS.
-* Cross-domain Ajax and Flash.
-* "Delete-key friendly." Easy to strip out parts you don't need.
-* Extensive inline and accompanying documentation.
+**ant buildkit**  # all html whitespace retained. inline script/style minified 
+
+**ant basics**    # same as build minus the basic html minfication
+
+**ant minify**    # same as build plus full html minification
+
+**ant text**      # same as build but without image (png/jpg) optimizing
 
 
-## Contributing
+## Environments
 
-Anyone and everyone is welcome to contribute. Hundreds of developers have helped make the HTML5 Boilerplate what it is today. There are several ways you can help out:
+**dev** - Increases build number, cleans and copies the build and optimises any images if the target originally did
 
-1. Raising [issues](https://github.com/h5bp/html5-boilerplate/issues) on GitHub.
-2. Sending pull requests for bug fixes or new features and improvements.
-3. Making the [docs](https://github.com/h5bp/html5-boilerplate/wiki) better.
+**test** - Runs everything that the original target did, however it does not strip the console.log or profiling parts
 
+**prod (default)** - Runs everything the original target did
+To run it you simply use ant <target> -Denv=<environment>
 
-## Project information
-
-* Source: http://github.com/h5bp/html5-boilerplate
-* Web: http://html5boilerplate.com
-* Docs: http://html5boilerplate.com/docs
-* Mailing list: http://h5bp.com/group
-* Twitter: http://twitter.com/h5bp
+ant build -Denv=dev
 
 
-## License
+## Wordpress integration
 
-### Major components:
+Check out Jay George's wordpress screencast videos: http://www.jaygeorge.co.uk/1-html5-buildscript-wordpress-1/
 
-* jQuery: MIT/GPL license
-* Modernizr: MIT/BSD license
-* Respond.js: MIT/GPL license
-* Normalize.css: Public Domain
+Using the build script on a Wordpress theme introduces a significant problem: Wordpress themes are installed to a website's /wp-content/themes/<theme-name> directory while the build script's output references the minified/concatenated files in a relative URI as js/scripts-xxxx.min.js. Therefore, output of the build script will reference files in the wrong location.
 
-### Everything else:
+To make the build script output files that reference the correct url /wp-content/themes/<theme-name>/js/scripts-xxxx.js, the build.xml file must be modified. Edit the 2 regular expressions near lines 599 (for js) and 699 (for css) to include the Wordpress PHP that dynamically references the theme's folder: (the line to add is indented)
 
-The Unlicense (aka: public domain)
+<replaceregexp match="&lt;!-- scripts concatenated [\d\w\s\W]*?!-- 
+end ((scripts)|(concatenated and minified scripts))--&gt;" 
+replace="&lt;script src='
+    &lt;?php bloginfo('template_url'); ?&gt;/
+${dir.js}/scripts-${build.number}.min.js\'&gt;&lt;/script&gt;" flags="m">
+
+
+## Anything Else
+
+[Build Script Docs](http://html5boilerplate.com/docs/Build-script/)
