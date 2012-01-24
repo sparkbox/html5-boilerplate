@@ -544,10 +544,3 @@ body {
   width: 100%;
   float: left;
 }
-
-@media (min-width: 300px) {
-  /* line 6, ../sass/_300.scss */
-  .threehundred {
-    background: red;
-  }
-}
