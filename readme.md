@@ -15,7 +15,7 @@ This project is the product of many years of iterative development and combined 
 
 **ant build**     # minor html optimizations (extra quotes removed). inline script/style minified (default)
 
-**ant buildkit**  # all html whitespace retained. inline script/style minified 
+**ant buildkit**  # all html whitespace retained. inline script/style minified
 
 **ant basics**    # same as build minus the basic html minfication
 
@@ -31,6 +31,7 @@ This project is the product of many years of iterative development and combined 
 **test** - Runs everything that the original target did, however it does not strip the console.log or profiling parts
 
 **prod (default)** - Runs everything the original target did
+
 To run it you simply use ant <target> -Denv=<environment>
 
 ant build -Denv=dev
