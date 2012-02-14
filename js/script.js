@@ -24,3 +24,5 @@ var APPName = {
     }
   }
 };
+
+$(document).ready(UTIL.loadEvents);
