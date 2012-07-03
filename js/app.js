@@ -1,5 +1,5 @@
-// When you change APPName, be sure to update it in mylibs/util.js
-var APPName = {
+// When you change APP, be sure to update it in mylibs/util.js
+var APP = {
   
   methodName: function() {
     
