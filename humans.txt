@@ -26,11 +26,6 @@
   Site: http://seesparkbox.com
   Twitter: robertharr
   Location: Dayton, OH
-
-  Web Developer: Andy Rossi
-  Site: http://seesparkbox.com
-  Twitter: andrewrocco
-  Location: Dayton, OH
   
   Software Engineer: Rob Tarr
   Site: http://seesparkbox.com
