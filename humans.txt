@@ -6,36 +6,51 @@
   Site: http://seesparkbox.com
   Twitter: bencallahan
   Location: Dayton, OH
-  
+
   Creative Director: Jeremy Loyd
   Site: http://seesparkbox.com
   Twitter: jeremyloyd
   Location: Dayton, OH
-  
-  Brand Analyst: Jän Ostendorf 
+
+  Brand Analyst: Jän Ostendorf
   Site: http://seesparkbox.com
   Twitter: jpostendorf
   Location: Dayton, OH
-  
-  Content Strategist: Drew Clemens 
+
+  Content Strategist: Drew Clemens
   Site: http://seesparkbox.com
   Twitter: drewtclemens
   Location: Dayton, OH
-  
-  Technical Director: Rob Harr 
+
+  Technical Director: Rob Harr
   Site: http://seesparkbox.com
   Twitter: robertharr
   Location: Dayton, OH
-  
+
   Software Engineer: Rob Tarr
   Site: http://seesparkbox.com
   Twitter: robtarr
   Location: Dayton, OH
-  
+
+  Software Engineer: Patrick Simpson
+  Site: http://seesparkbox.com
+  Twitter: SimpsonPatrick
+  Location: Dayton, OH
+
+  Web Developer: Adam Simpson
+  Site: http://seesparkbox.com
+  Twitter: a_simpson
+  Location: Dayton, OH
+
+  Web Developer: Ethan Muller
+  Site: http://seesparkbox.com
+  Twitter: ethanmuller
+  Location: Dayton, OH
+
   Office Manager: Dom Richardson
   Site: http://seesparkbox.com
   Location: Dayton, OH
-  
+
 
 /* THANKS */
   Names (& URL):
