@@ -64,13 +64,34 @@ module.exports = function(grunt) {
           'docs/scss': 'sass/*.scss'
         }
       }
+    },
+    docco: {
+      dist: {
+        src: ['js/*.js', 'js/*.coffee'],
+        out: 'docs/js'
+      }
+    },
+    shell: {
+        mkdir: {
+          command: 'mkdir -p docs/js/'
+        },
+        mv_html: {
+          command: 'mv docs/*.html docs/js/'
+        },
+        mv_css: {
+          command: 'mv docs/*.css docs/js/'
+        }
     }
   });
 
   grunt.loadNpmTasks("grunt-modernizr");
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks('grunt-styleguide');
+  grunt.loadNpmTasks('grunt-docco');
+  grunt.loadNpmTasks('grunt-shell');
 
   // Default task.
   grunt.registerTask('default', 'concat min modernizr');
+  grunt.registerTask('docs', 'styleguide docco shell:mkdir shell:mv_html shell:mv_css');
+
 };
