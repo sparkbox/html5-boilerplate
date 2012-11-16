@@ -56,11 +56,21 @@ module.exports = function(grunt) {
       matchCommunityTests: false
     },
 
-    clean: ["js/*.concat.js", "dist"]
+    clean: ["js/*.concat.js", "dist", "docs"],
+
+    styleguide: {
+      dist: {
+        files: {
+          'docs/scss': 'sass/*.scss'
+        }
+      }
+    }
   });
 
   grunt.loadNpmTasks("grunt-modernizr");
   grunt.loadNpmTasks("grunt-contrib-clean");
+  grunt.loadNpmTasks('grunt-styleguide');
+
   // Default task.
   grunt.registerTask('default', 'concat min modernizr');
 };

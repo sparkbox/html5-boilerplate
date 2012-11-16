@@ -29,6 +29,7 @@ nbproject
 intermediate
 publish
 dist
+docs
 .idea
 
 # build script local files
