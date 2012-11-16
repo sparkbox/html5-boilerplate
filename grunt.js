@@ -20,18 +20,47 @@ module.exports = function(grunt) {
         //i.e. src: ['js/libs/mediaCheck.js', 'js/app.js'],
         src: ['js/app.js'],
         //change this to a site specific name i.e. uwg.js or dty.js
-        dest: 'js/app_concat.js'
+        dest: 'js/app.concat.js'
       }
     },
 
     min: {
       dist: {
-        src: ['js/app_concat.js'],
-        dest: 'js/app_concat.min.js'
+        src: ['js/app.concat.js'],
+        dest: 'dist/js/app.min.js'
       }
-    }
+    },
+
+    modernizr: {
+      devFile: "js/libs/modernizr-dev.js",
+      outputFile: "dist/js/modernizr.min.js",
+      extra: {
+          shiv: true,
+          printshiv: false,
+          load: true,
+          mq: false,
+          cssclasses: true
+      },
+      extensibility: {
+          addtest: false,
+          prefixed: false,
+          teststyles: false,
+          testprops: false,
+          testallprops: false,
+          hasevents: false,
+          prefixes: false,
+          domprefixes: false
+      },
+      uglify: true,
+      parseFiles: true,
+      matchCommunityTests: false
+    },
+
+    clean: ["js/*.concat.js", "dist"]
   });
 
+  grunt.loadNpmTasks("grunt-modernizr");
+  grunt.loadNpmTasks("grunt-contrib-clean");
   // Default task.
-  grunt.registerTask('default', 'concat min');
+  grunt.registerTask('default', 'concat min modernizr');
 };
