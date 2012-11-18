@@ -87,6 +87,14 @@ module.exports = function(grunt) {
       docco: {
         command: 'docco -o docs/js/ js/*.js js/*.coffee'
       }
+    },
+
+    growl: {
+      'default': {
+        message: "Build complete.",
+        title: "Grunt",
+        image: __dirname.replace(/\s/,"\\ ") + "/grunt-logo.png"
+      }
     }
   });
 
@@ -98,10 +106,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-styleguide');
   grunt.loadNpmTasks('grunt-targethtml');
   grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-growl');
 
 
   // Default task.
-  grunt.registerTask('default', ['coffee', 'sass', 'targethtml:dev', 'docs']);
-  grunt.registerTask('dist', ['coffee', 'concat', 'targethtml:prod', 'modernizr']); // Needs min task added
-  grunt.registerTask('docs', ['styleguide', 'exec:docco']);
+  grunt.registerTask('default', ['coffee', 'sass', 'targethtml:dev', 'growl']);
+  grunt.registerTask('dist', ['coffee', 'concat', 'targethtml:prod', 'modernizr', 'docs', 'growl']); // Needs min task added
+  grunt.registerTask('docs', ['styleguide', 'exec:docco', 'growl']);
 };
