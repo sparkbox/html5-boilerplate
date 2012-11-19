@@ -89,6 +89,19 @@ module.exports = function(grunt) {
       }
     },
 
+    jasmine : {
+      src : ['js/libs/*.js','js/*.js'],
+      specs : 'test/spec/*Spec.js',
+      helpers : 'test/spec/*Helper.js',
+      timeout : 10000,
+      server: {
+        port: 8800
+      },
+      phantomjs : {
+        'ignore-ssl-errors' : true
+      }
+    },
+
     growl: {
       'default': {
         message: "Build complete.",
@@ -102,6 +115,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-jasmine-runner');
   grunt.loadNpmTasks('grunt-modernizr');
   grunt.loadNpmTasks('grunt-styleguide');
   grunt.loadNpmTasks('grunt-targethtml');
@@ -110,7 +124,7 @@ module.exports = function(grunt) {
 
 
   // Default task.
-  grunt.registerTask('default', ['coffee', 'sass', 'targethtml:dev', 'growl']);
+  grunt.registerTask('default', ['coffee', 'sass', 'targethtml:dev', 'jasmine', 'growl']);
   grunt.registerTask('dist', ['coffee', 'concat', 'targethtml:prod', 'modernizr', 'docs', 'growl']); // Needs min task added
   grunt.registerTask('docs', ['styleguide', 'exec:docco', 'growl']);
 };
