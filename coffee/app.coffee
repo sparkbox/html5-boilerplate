@@ -1,5 +1,5 @@
 # When you change APP, be sure to update it in mylibs/util.js
-APP =
+window.APP =
 
   methodName: ->
 
@@ -14,6 +14,5 @@ APP =
     init: ->
 
     finalize: ->
-
 
 $(document).ready UTIL.loadEvents
