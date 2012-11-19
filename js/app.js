@@ -1,7 +1,6 @@
 (function() {
-  var APP;
 
-  APP = {
+  window.APP = {
     methodName: function() {},
     common: {
       init: function() {},
