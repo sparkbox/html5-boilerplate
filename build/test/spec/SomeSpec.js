@@ -1,0 +1,1 @@
+describe("This App",function(){beforeEach(function(){}),afterEach(function(){}),it("should find the app files",function(){expect(typeof APP).toEqual("object")})})

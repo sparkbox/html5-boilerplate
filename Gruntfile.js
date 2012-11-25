@@ -1,16 +1,11 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
-  // Project configuration.
   grunt.initConfig({
     watch: {
       files: ['sass/*', 'coffee/*'],
       tasks: 'default'
     },
-
-    // lint: {
-    //   files: 'js/app.js'
-    // },
 
     sass: {
       dist: {
@@ -28,13 +23,24 @@ module.exports = function(grunt) {
       }
     },
 
-    concat: {
-      dist: {
-        //i.e. src: ['js/libs/mediaCheck.js', 'js/app.js'],
-        src: ['js/app.js'],
-        //change this to a site specific name i.e. uwg.js or dty.js
-        dest: 'dist/js/app.js'
-      }
+    requirejs: {
+      almond: true,
+      replaceRequireScript: [{
+        files: ['build/index.html'],
+        module: 'main'
+      }],
+      appDir: "app",
+      baseUrl: "js/",
+      dir: "build",
+      // optimize: "none",
+      paths: {
+        jquery: 'libs/jquery'
+      },
+      modules: [
+        {
+          name: "main"
+        }
+      ]
     },
 
     modernizr: {
@@ -62,30 +68,13 @@ module.exports = function(grunt) {
       matchCommunityTests: false
     },
 
-    targethtml: {
-      dev: {
-        src: 'index.html',
-        dest: 'dist/index.html'
-      },
-      prod: {
-        src: 'index.html',
-        dest: 'dist/index.html'
-      }
-    },
-
-    clean: ["js/*.concat.js", "dist", "docs"],
+    clean: ["dist", "docs"],
 
     styleguide: {
       dist: {
         files: {
           'docs/scss': 'sass/*.scss'
         }
-      }
-    },
-
-    exec: {
-      docco: {
-        command: 'docco -o docs/js/ js/*.js js/*.coffee'
       }
     },
 
@@ -114,17 +103,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-jasmine-runner');
+  grunt.loadNpmTasks('grunt-requirejs');
   grunt.loadNpmTasks('grunt-modernizr');
   grunt.loadNpmTasks('grunt-styleguide');
-  grunt.loadNpmTasks('grunt-targethtml');
-  grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-jasmine-runner');
   grunt.loadNpmTasks('grunt-growl');
 
 
-  // Default task.
-  grunt.registerTask('default', ['coffee', 'sass', 'targethtml:dev', 'jasmine', 'growl']);
-  grunt.registerTask('dist', ['coffee', 'concat', 'targethtml:prod', 'modernizr', 'docs', 'growl']); // Needs min task added
-  grunt.registerTask('docs', ['styleguide', 'exec:docco', 'growl']);
+  // Tasks
+  grunt.registerTask('default', ['coffee', 'sass', 'jasmine', 'requirejs', 'growl']);
+  grunt.registerTask('dist', ['coffee', 'modernizr', 'styleguide', 'growl']); // Needs min task added
 };

@@ -1,0 +1,1 @@
+UTIL={fire:function(e,t,n){var r=APP;t=t===undefined?"init":t,e!==""&&r[e]&&typeof r[e][t]=="function"&&r[e][t](n)},loadEvents:function(){var e=document.body.id;UTIL.fire("common"),$.each(document.body.className.split(/\s+/),function(t,n){UTIL.fire(n),UTIL.fire(n,e)}),UTIL.fire("common","finalize")}}

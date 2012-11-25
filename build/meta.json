@@ -1,0 +1,11 @@
+{
+  "name": "sparkbox",
+  "description": "Set your site free.",
+  "version": "2.0",
+  "author": "Sparkbox",
+  "homepage": "http://seesparkbox.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sparkbox/sparkbox-website.git"
+  }
+}
