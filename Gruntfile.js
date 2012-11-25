@@ -26,12 +26,12 @@ module.exports = function(grunt) {
     requirejs: {
       almond: true,
       replaceRequireScript: [{
-        files: ['build/index.html'],
+        files: ['release/index.html'],
         module: 'main'
       }],
       appDir: "app",
       baseUrl: "js/",
-      dir: "build",
+      dir: "release",
       // optimize: "none",
       paths: {
         jquery: 'libs/jquery'
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
 
     modernizr: {
       devFile: "app/js/libs/modernizr-dev.js",
-      outputFile: "build/js/modernizr.min.js",
+      outputFile: "release/js/modernizr.min.js",
       extra: {
         shiv: true,
         printshiv: false,
@@ -68,7 +68,10 @@ module.exports = function(grunt) {
       matchCommunityTests: false
     },
 
-    clean: ['build', 'docs', 'app/js/main.js', 'app/stylesheets/base.css'],
+    clean: {
+      commit: ['release', 'docs', 'app/js/main.js', 'app/stylesheets/base.css'],
+      release: ['release/coffee', 'release/sass', 'release/test/', 'release/_SpecRunner.html', 'release/meta.json', 'release/readme.md']
+    },
 
     styleguide: {
       dist: {
@@ -93,7 +96,7 @@ module.exports = function(grunt) {
 
     growl: {
       'default': {
-        message: "Build complete.",
+        message: "release complete.",
         title: "Grunt",
         image: __dirname.replace(/\s/,"\\ ") + "/grunt-logo.png"
       }
@@ -111,5 +114,5 @@ module.exports = function(grunt) {
 
   // Tasks
   grunt.registerTask('default', ['coffee', 'sass', 'jasmine', 'requirejs', 'growl']);
-  grunt.registerTask('build', ['coffee', 'sass', 'jasmine', 'requirejs', 'modernizr', 'styleguide', 'growl']);
+  grunt.registerTask('release', ['coffee', 'sass', 'jasmine', 'requirejs', 'modernizr', 'styleguide', 'clean:release', 'growl']);
 };
