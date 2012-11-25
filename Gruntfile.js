@@ -3,14 +3,14 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     watch: {
-      files: ['sass/*', 'coffee/*'],
+      files: ['app/sass/*', 'app/coffee/*'],
       tasks: 'default'
     },
 
     sass: {
       dist: {
         files: {
-          'base.css': 'sass/base.scss'
+          'app/stylesheets/base.css': 'app/sass/base.scss'
         }
       }
     },
@@ -18,7 +18,7 @@ module.exports = function(grunt) {
     coffee: {
       compile: {
         files: {
-          'js/app.js': 'coffee/app.coffee'
+          'app/js/main.js': 'app/coffee/main.coffee'
         }
       }
     },
@@ -44,8 +44,8 @@ module.exports = function(grunt) {
     },
 
     modernizr: {
-      devFile: "js/libs/modernizr-dev.js",
-      outputFile: "dist/js/modernizr.min.js",
+      devFile: "app/js/libs/modernizr-dev.js",
+      outputFile: "build/js/modernizr.min.js",
       extra: {
         shiv: true,
         printshiv: false,
@@ -68,12 +68,12 @@ module.exports = function(grunt) {
       matchCommunityTests: false
     },
 
-    clean: ["dist", "docs"],
+    clean: ['build', 'docs', 'app/js/main.js', 'app/stylesheets/base.css'],
 
     styleguide: {
       dist: {
         files: {
-          'docs/scss': 'sass/*.scss'
+          'docs/scss': 'app/sass/*.scss'
         }
       }
     },
@@ -109,8 +109,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jasmine-runner');
   grunt.loadNpmTasks('grunt-growl');
 
-
   // Tasks
   grunt.registerTask('default', ['coffee', 'sass', 'jasmine', 'requirejs', 'growl']);
-  grunt.registerTask('dist', ['coffee', 'modernizr', 'styleguide', 'growl']); // Needs min task added
+  grunt.registerTask('build', ['coffee', 'sass', 'jasmine', 'requirejs', 'modernizr', 'styleguide', 'growl']);
 };

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testsuites>
-<testsuite name="This App" errors="0" tests="1" failures="0" time="0.009" timestamp="[object Object]">
-  <testcase classname="This App" name="should be able to do something" time="0.007"></testcase>
-</testsuite>
-</testsuites>
