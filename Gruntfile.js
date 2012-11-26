@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     watch: {
       files: ['app/sass/*', 'app/coffee/*'],
-      tasks: 'default'
+      tasks: 'watching'
     },
 
     sass: {
@@ -43,9 +43,20 @@ module.exports = function(grunt) {
       ]
     },
 
+    targethtml: {
+      dev: {
+        src: 'app/index.dev.html',
+        dest: 'app/index.html'
+      },
+      release: {
+        src: 'app/index.dev.html',
+        dest: 'build/index.html'
+      }
+    },
+
     modernizr: {
       devFile: "app/js/libs/modernizr-dev.js",
-      outputFile: "release/js/modernizr.min.js",
+      outputFile: "release/js/libs/modernizr.min.js",
       extra: {
         shiv: true,
         printshiv: false,
@@ -70,7 +81,7 @@ module.exports = function(grunt) {
 
     clean: {
       commit: ['release', 'docs', 'app/js/main.js', 'app/stylesheets/base.css'],
-      release: ['release/coffee', 'release/sass', 'release/test/', 'release/_SpecRunner.html', 'release/meta.json', 'release/readme.md']
+      release: ['release/coffee', 'release/sass', 'release/index.dev.html', 'release/test/', 'release/_SpecRunner.html', 'release/meta.json', 'release/readme.md']
     },
 
     styleguide: {
@@ -107,12 +118,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-requirejs');
+  grunt.loadNpmTasks('grunt-targethtml');
   grunt.loadNpmTasks('grunt-modernizr');
   grunt.loadNpmTasks('grunt-styleguide');
   grunt.loadNpmTasks('grunt-jasmine-runner');
   grunt.loadNpmTasks('grunt-growl');
 
   // Tasks
-  grunt.registerTask('default', ['coffee', 'sass', 'jasmine', 'requirejs', 'growl']);
-  grunt.registerTask('release', ['coffee', 'sass', 'jasmine', 'requirejs', 'modernizr', 'styleguide', 'clean:release', 'growl']);
+  grunt.registerTask('watching', ['coffee', 'sass', 'jasmine', 'targethtml:dev', 'growl']);
+  grunt.registerTask('default', ['coffee', 'sass', 'jasmine', 'requirejs', 'targethtml:dev', 'growl']);
+  grunt.registerTask('release', ['coffee', 'sass', 'jasmine', 'requirejs', 'targethtml:release', 'modernizr', 'styleguide', 'clean:release', 'growl']);
 };
